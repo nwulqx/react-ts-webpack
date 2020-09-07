@@ -11,11 +11,17 @@ code . # vscode打开这个文件夹
 ```
 
 Create file **webpack.config.js**: This is for webpack configurations
+
 Create file **tsconfig.json**: This is for typescript configurations
+
 Create file **server.js**: This is your server to start up the application
+
 Create folder **src**.
+
 Create folder **app** inside **src**.
+
 Create a file **index.html** inside **app** and folder **components**
+
 Create files **App.tsx** inside **app** and **Hello.tsx** inside components
 
 ```shell
