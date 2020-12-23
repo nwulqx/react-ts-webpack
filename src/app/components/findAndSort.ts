@@ -1,3 +1,9 @@
+/**
+ * 实现find函数
+ * 1. JS基础
+ * 2. 正则表达式能力
+ * 3. 链式调用
+ **/
 interface DataType {
   // 注意：索引签名的学习！
   [key: string]: number | string | null;
@@ -26,6 +32,7 @@ interface RegexData {
   title: RegExp;
 }
 const find = (origin: DataType[]) => {
+  // TODO begin
   return {
     where: (regexData: RegexData) => {
       origin = origin.filter((item: DataType) => {
@@ -47,6 +54,7 @@ const find = (origin: DataType[]) => {
       };
     },
   };
+  // TODO above
 };
 const result = find(data).where({ title: /\d$/ }).orderBy("userId", "desc");
-console.log(result);
+console.log(result); //[{userId: 19,title: "title2"},{userId: 8,title: "title1"}]
