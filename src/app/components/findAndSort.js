@@ -17,6 +17,7 @@ var data = [
     },
 ];
 var find = function (origin) {
+    // TODO begin
     return {
         where: function (regexData) {
             origin = origin.filter(function (item) {
@@ -38,6 +39,7 @@ var find = function (origin) {
             };
         }
     };
+    // TODO above
 };
 var result = find(data).where({ title: /\d$/ }).orderBy("userId", "desc");
-console.log(result);
+console.log(result); //[{userId: 19,title: "title2"},{userId: 8,title: "title1"}]
