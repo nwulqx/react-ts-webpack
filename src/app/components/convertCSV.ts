@@ -1,10 +1,13 @@
-// 给定CSV文件，转换成对象结构（并提供测试用例）
+/**
+ * 给定CSV文件，转换成对象结构（并提供测试用例）
+ * 考点：
+ * 1. 递归生成树结构
+ */
 interface Person {
   name: string;
   age: number;
   Parent?: Person[];
   Children?: Person[];
-  P?: string;
 }
 
 const csv = `
@@ -15,39 +18,35 @@ Anna,10,Bob
 `;
 
 let root;
-const node: Person[] = [];
+
 const convertCSV = (csv: string) => {
   const csvarray = csv.split("\n");
-  const len = csvarray.length - 2;
-  for (let i = 2; i < csvarray.length - 1; i += 1) {
-    const strArr = csvarray[i].split(",");
-    const tnode: Person = {
-      name: strArr[0],
-      age: parseInt(strArr[1]),
-      P: strArr[2],
-    };
-    if (strArr[2] === "") {
-      root = i - 2;
+  const arr = csvarray.slice(1, csvarray.length - 1);
+  const result = arr.map((element, index) => {
+    const temp = element.split(",");
+    if (temp[2] === "") {
+      root = index;
     }
-    node.push(tnode);
-  }
+    return temp;
+  });
+  return result;
 };
-convertCSV(csv);
+const node = convertCSV(csv);
 
-console.log("node:", node);
-console.log("root:", root);
+// console.log("node:", node);
+// console.log("root:", root);
 
-const createTree = (root: number, node: Person[]) => {
+const createTree = (root: number, node: Array<string>[]) => {
   const person: Person = {
-    name: node[root].name,
-    age: node[root].age,
+    name: node[root][0],
+    age: parseInt(node[root][1]),
   };
   node.forEach((item, index) => {
-    if (item.P === node[root].name) {
-      console.log("item.P:", item.P);
-      console.log("node[root].name:", node[root].name);
+    if (node[root][0] === item[2]) {
+      // console.log("item.P:", item[2]);
+      // console.log("node[root].name:", node[root][0]);
       const child = createTree(index, node);
-      console.log("child", child);
+      // console.log("child", child);
       person.Children = [];
       person.Children.push(child);
     }

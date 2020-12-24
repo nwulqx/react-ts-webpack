@@ -1,40 +1,35 @@
 var csv = "\nname,age,Parent\nBob,30,David\nDavid,60,\nAnna,10,Bob\n";
 var root;
-var node = [];
 var convertCSV = function (csv) {
     var csvarray = csv.split("\n");
-    var len = csvarray.length - 2;
-    for (var i = 2; i < csvarray.length - 1; i += 1) {
-        var strArr = csvarray[i].split(",");
-        var tnode = {
-            name: strArr[0],
-            age: parseInt(strArr[1]),
-            P: strArr[2]
-        };
-        if (strArr[2] === "") {
-            root = i - 2;
+    var arr = csvarray.slice(1, csvarray.length - 1);
+    var result = arr.map(function (element, index) {
+        var temp = element.split(",");
+        if (temp[2] === "") {
+            root = index;
         }
-        node.push(tnode);
-    }
+        return temp;
+    });
+    return result;
 };
-convertCSV(csv);
-console.log("node:", node);
-console.log("root:", root);
+var node = convertCSV(csv);
+// console.log("node:", node);
+// console.log("root:", root);
 var createTree = function (root, node) {
     var person = {
-        name: node[root].name,
-        age: node[root].age
+        name: node[root][0],
+        age: parseInt(node[root][1])
     };
     node.forEach(function (item, index) {
-        if (item.P === node[root].name) {
-            console.log("item.P:", item.P);
-            console.log("node[root].name:", node[root].name);
+        if (node[root][0] === item[2]) {
+            // console.log("item.P:", item[2]);
+            // console.log("node[root].name:", node[root][0]);
             var child = createTree(index, node);
-            console.log("child", child);
+            // console.log("child", child);
             person.Children = [];
             person.Children.push(child);
         }
     });
     return person;
 };
-console.log("createTree:", JSON.stringify(createTree(root, node)));
+console.log("createTree:", createTree(root, node));
