@@ -57,4 +57,4 @@ const find = (origin: DataType[]) => {
   // TODO above
 };
 const result = find(data).where({ title: /\d$/ }).orderBy("userId", "desc");
-console.log(result); //[{userId: 19,title: "title2"},{userId: 8,title: "title1"}]
+console.log(result); //输出：[{userId: 19,title: "title2"},{userId: 8,title: "title1"}]
