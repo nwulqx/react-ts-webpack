@@ -5,7 +5,7 @@
  * 3. 链式调用
  **/
 interface DataType {
-  // 注意：索引签名的学习！
+  // 注意：索引签名的使用~
   [key: string]: number | string | null;
   userId: number;
   title: string | null;
